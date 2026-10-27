@@ -49,6 +49,10 @@ enum Command {
         #[command(subcommand)]
         action: Option<ConfigAction>,
     },
+    /// Print this folder's Claude Code settings, key masked
+    Show,
+    /// Look for anything that overrides this folder's settings
+    Doctor,
     /// Print the version
     Version,
 }
@@ -89,6 +93,8 @@ fn main() {
         Some(Command::Check { all }) => commands::check::run(all),
         Some(Command::Key { action }) => commands::key::run(action),
         Some(Command::Config { action }) => commands::config::run(action),
+        Some(Command::Show) => commands::show::run(),
+        Some(Command::Doctor) => commands::doctor::run(),
         Some(Command::Version) => {
             println!("ccl {VERSION}");
             Ok(())

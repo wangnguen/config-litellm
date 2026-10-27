@@ -3,9 +3,11 @@
 
 pub mod check;
 pub mod config;
+pub mod doctor;
 pub mod home;
 pub mod key;
 pub mod ls;
+pub mod show;
 
 use std::env;
 use std::path::PathBuf;
