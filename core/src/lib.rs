@@ -9,5 +9,6 @@ pub mod gateway;
 pub mod keys;
 pub mod models;
 pub mod paths;
+pub mod settings;
 
 pub use error::{Error, Result};
