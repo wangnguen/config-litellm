@@ -44,6 +44,11 @@ enum Command {
         #[command(subcommand)]
         action: Option<KeyAction>,
     },
+    /// Print ~/.ccl/config.json, or open it in an editor
+    Config {
+        #[command(subcommand)]
+        action: Option<ConfigAction>,
+    },
     /// Print the version
     Version,
 }
@@ -58,6 +63,14 @@ pub enum KeyAction {
     Use { name: String },
     /// Delete a saved key
     Rm { name: String },
+}
+
+#[derive(Subcommand)]
+pub enum ConfigAction {
+    /// Open config.json in your editor
+    Edit,
+    /// Print where ccl keeps its files
+    Path,
 }
 
 fn main() {
@@ -75,6 +88,7 @@ fn main() {
         Some(Command::Ls) => commands::ls::run(),
         Some(Command::Check { all }) => commands::check::run(all),
         Some(Command::Key { action }) => commands::key::run(action),
+        Some(Command::Config { action }) => commands::config::run(action),
         Some(Command::Version) => {
             println!("ccl {VERSION}");
             Ok(())
