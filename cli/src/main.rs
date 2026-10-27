@@ -16,6 +16,8 @@ pub const VERSION: &str = match option_env!("CCL_VERSION") {
     Some(version) => version,
     None => env!("CARGO_PKG_VERSION"),
 };
+/// Where releases are published; `update` and the install scripts read it.
+pub const REPO: &str = "wangnguen/config-litellm";
 
 #[derive(Parser)]
 #[command(
@@ -53,6 +55,10 @@ enum Command {
     Show,
     /// Look for anything that overrides this folder's settings
     Doctor,
+    /// Download and install the latest release
+    Update,
+    /// Remove ccl, its config and every saved key
+    Uninstall,
     /// Print the version
     Version,
 }
@@ -86,6 +92,7 @@ fn main() {
         crossterm::style::force_color_output(false);
         term::set_color(false);
     }
+    commands::update::clean_leftovers();
 
     let result = match Cli::parse().command {
         None => commands::home::run(),
@@ -95,6 +102,8 @@ fn main() {
         Some(Command::Config { action }) => commands::config::run(action),
         Some(Command::Show) => commands::show::run(),
         Some(Command::Doctor) => commands::doctor::run(),
+        Some(Command::Update) => commands::update::run(),
+        Some(Command::Uninstall) => commands::uninstall::run(),
         Some(Command::Version) => {
             println!("ccl {VERSION}");
             Ok(())

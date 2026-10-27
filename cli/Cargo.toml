@@ -12,3 +12,4 @@ anyhow = "1"
 clap = { version = "4", features = ["derive"] }
 crossterm = "0.28"
 serde_json.workspace = true
+ureq.workspace = true

@@ -8,6 +8,8 @@ pub mod home;
 pub mod key;
 pub mod ls;
 pub mod show;
+pub mod uninstall;
+pub mod update;
 
 use std::env;
 use std::path::PathBuf;
