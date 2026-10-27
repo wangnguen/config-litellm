@@ -1,0 +1,24 @@
+[workspace]
+members = ["core"]
+resolver = "3"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+# Let chains (`if let ... && ...`) are used throughout; they stabilized in
+# 1.88, so edition 2024 alone is not enough to build this.
+rust-version = "1.88"
+repository = "https://github.com/wangnguen/config-litellm"
+
+[workspace.dependencies]
+ccl-core = { path = "core" }
+serde = { version = "1", features = ["derive"] }
+# preserve_order keeps a hand-edited settings file in the order its author
+# wrote it, instead of re-sorting every key on each save.
+serde_json = { version = "1", features = ["preserve_order"] }
+ureq = "3"
+
+[profile.release]
+strip = true
+lto = true
+codegen-units = 1
