@@ -1,0 +1,3 @@
+# LF everywhere: install.sh must run as-is when curl-piped, and rustfmt in CI
+# checks LF files.
+* text=auto eol=lf
