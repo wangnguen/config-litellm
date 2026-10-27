@@ -5,6 +5,7 @@
 pub mod config;
 pub mod error;
 mod file;
+pub mod keys;
 pub mod models;
 pub mod paths;
 
