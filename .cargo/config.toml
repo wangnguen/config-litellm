@@ -1,0 +1,9 @@
+# Static-link the MSVC C runtime into Windows binaries so they don't import
+# VCRUNTIME140.dll at load time. Without it, a machine lacking the Microsoft
+# Visual C++ Redistributable cannot start ccl.exe at all. Target-scoped so
+# macOS/Linux builds are unaffected.
+[target.x86_64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[target.aarch64-pc-windows-msvc]
+rustflags = ["-C", "target-feature=+crt-static"]
