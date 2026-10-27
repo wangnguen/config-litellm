@@ -1,0 +1,13 @@
+[package]
+name = "ccl"
+description = "Point Claude Code at a LiteLLM gateway and pick its model"
+version.workspace = true
+edition.workspace = true
+rust-version.workspace = true
+repository.workspace = true
+
+[dependencies]
+ccl-core.workspace = true
+anyhow = "1"
+clap = { version = "4", features = ["derive"] }
+crossterm = "0.28"
