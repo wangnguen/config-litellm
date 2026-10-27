@@ -31,6 +31,14 @@ struct Cli {
 
 #[derive(Subcommand)]
 enum Command {
+    /// List the models your key can use, and which slot uses each
+    Ls,
+    /// Call each slot's model for real and time the answer
+    Check {
+        /// Call every model the key can use, not only the four slots
+        #[arg(long)]
+        all: bool,
+    },
     /// Print the version
     Version,
 }
@@ -47,6 +55,8 @@ fn main() {
 
     let result = match Cli::parse().command {
         None => commands::home::run(),
+        Some(Command::Ls) => commands::ls::run(),
+        Some(Command::Check { all }) => commands::check::run(all),
         Some(Command::Version) => {
             println!("ccl {VERSION}");
             Ok(())

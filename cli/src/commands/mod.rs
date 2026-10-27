@@ -1,7 +1,9 @@
 //! What every command needs before it starts: the folder, ccl's config, the
 //! saved keys and the folder's Claude Code settings.
 
+pub mod check;
 pub mod home;
+pub mod ls;
 
 use std::env;
 use std::path::PathBuf;
