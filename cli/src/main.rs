@@ -39,8 +39,25 @@ enum Command {
         #[arg(long)]
         all: bool,
     },
+    /// Manage saved keys (no action: list them)
+    Key {
+        #[command(subcommand)]
+        action: Option<KeyAction>,
+    },
     /// Print the version
     Version,
+}
+
+#[derive(Subcommand)]
+pub enum KeyAction {
+    /// List saved keys
+    Ls,
+    /// Save a key under a name (the key is asked for, hidden)
+    Add { name: String },
+    /// Use a saved key in this folder and make it the default
+    Use { name: String },
+    /// Delete a saved key
+    Rm { name: String },
 }
 
 fn main() {
@@ -57,6 +74,7 @@ fn main() {
         None => commands::home::run(),
         Some(Command::Ls) => commands::ls::run(),
         Some(Command::Check { all }) => commands::check::run(all),
+        Some(Command::Key { action }) => commands::key::run(action),
         Some(Command::Version) => {
             println!("ccl {VERSION}");
             Ok(())

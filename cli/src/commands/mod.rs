@@ -3,6 +3,7 @@
 
 pub mod check;
 pub mod home;
+pub mod key;
 pub mod ls;
 
 use std::env;
